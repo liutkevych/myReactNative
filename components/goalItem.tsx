@@ -1,15 +1,22 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 import { ListGoal } from "../App";
 
 interface PropsI {
-    item: ListGoal
+    item: ListGoal,
+    deleteItem: (goal:ListGoal) => void
 }
 
-const GoalItem = ({item}: PropsI) => {
+const GoalItem = ({item, deleteItem}: PropsI) => {
+    const pressHandler = () => {
+        console.log('huj')
+    }
+
     return (
-        <View style={styles.singleGoal}>
-            <Text>{item}</Text>
-        </View>
+        <Pressable onPress={pressHandler} onLongPress={() => deleteItem(item)}>
+            <View style={styles.singleGoal}>
+                <Text>{item}</Text>
+            </View>
+        </Pressable>
     )
 }
 export default GoalItem;

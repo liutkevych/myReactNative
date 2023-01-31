@@ -13,6 +13,10 @@ export default function App() {
     function addGoalHandler(newGoal:ListGoal){
         setListGoals((listGoals) => [...listGoals, newGoal]);
     }
+    function deleteItem (item: ListGoal){
+        console.log('zalupa!');
+        setListGoals(prevGoals => prevGoals.filter(goal => goal !== item));
+    }
     
     return (
         <View style={styles.appContainer}>
@@ -22,7 +26,10 @@ export default function App() {
             <View style={styles.goalsContainer}>
             <FlatList 
                 data={listGoals}
-                renderItem={(itemData) => <GoalItem item={itemData.item}/> }
+                renderItem={(itemData) => <GoalItem 
+                    item={itemData.item}
+                    deleteItem={deleteItem}
+                /> }
                 keyExtractor = {(item, index) => Math.random().toString()}
                 alwaysBounceVertical={false}
             />
